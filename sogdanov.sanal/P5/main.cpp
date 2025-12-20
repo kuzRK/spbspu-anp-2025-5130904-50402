@@ -6,7 +6,7 @@ namespace sogdanov
     double y;
   };
   struct rectangle_t {
-    double wight;
+    double widht;
     double height;
     point_t pos;
   };
@@ -17,6 +17,18 @@ namespace sogdanov
     virtual void move(const point_t p) = 0;
     virtual void move(double dx, double dy) = 0;
     virtual void scale(double k) = 0;
+  };
+  struct Rectangle: Shape {
+    Rectangle(double widht, double height, point_t p);
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
+    void move(const point_t p) override;
+    void move(double dx, double dy) override;
+    void scale(double k) override;
+  private:
+    double width_;
+    double height;
+    poin_t pos_;
   };
 }
 int main()
