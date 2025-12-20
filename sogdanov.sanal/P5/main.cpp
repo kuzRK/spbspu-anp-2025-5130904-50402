@@ -35,7 +35,7 @@ namespace sogdanov
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(double dx, double dy) override;
-    void move(point_t p) override;
+    void move(const point_t p) override;
     void scale(double k) override;
   private:
     double d_;
@@ -46,7 +46,7 @@ namespace sogdanov
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(double dx, double dy) override;
-    void move(point_t p) override;
+    void move(const point_t p) override;
     void scale(double k) override;
   private:
     double dx_;
@@ -67,17 +67,41 @@ sogdanov::rectangle_t sogdanov::Rectangle::getFrameRect() const override
 {
   return rectangle_t{width_, height_, pos_};
 }
-void move(const point_t p) override
+void sogdanov::Rectangle::move(const point_t p) override
 {
   pos_ = p;
 }
-void move(double dx, double dy) override;
+void sogdanov::Rectangle::move(double dx, double dy) override;
 {
   pos_.x += dx;
   pos_.y += dy;
 }
-void scale(double k) override;
+void sogdanov::Rectangle::scale(double k) override;
 {
   width_ *= k;
   height_ *= k;
+}
+sogdanov::Xquare::Xquare(double d, point_t p)
+  d_(d), pos_(p)
+{}
+double getArea() const override
+{
+  return (d_ * d_) / 2.0;
+}
+sogdanov::rectangle_t sogdanov::Xquare::getFrameRect() const override
+{
+  return rectangle_t{d_, d_, pos_};
+}
+void sogdanov::Xquare::move(double dx, double dy) override
+{
+  pos_.x += dx;
+  pos_.y += dy;
+}
+void sogdanov::Xquare::move(point_t p) override
+{
+  pos_ = p;
+}
+void sogdanov::Xquare::scale(double k) override
+{
+  d_ *= k;
 }
