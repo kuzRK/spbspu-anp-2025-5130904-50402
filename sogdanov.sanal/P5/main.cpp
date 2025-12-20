@@ -56,3 +56,28 @@ namespace sogdanov
 }
 int main()
 {}
+sogdanov::Rectangle::Rectangle(double width, double height, point_t p):
+  sogdanov::Shape(), width(width_), height(height_), p(pos_)
+{}
+double sogdanov::Rectangle::getArea() const
+{
+  return width_ * height_;
+}
+sogdanov::rectangle_t sogdanov::Rectangle::getFrameRect() const override
+{
+  return rectangle_t{width_, height_, pos_};
+}
+void move(const point_t p) override
+{
+  pos_ = p;
+}
+void move(double dx, double dy) override;
+{
+  pos_.x += dx;
+  pos_.y += dy;
+}
+void scale(double k) override;
+{
+  width_ *= k;
+  height_ *= k;
+}
