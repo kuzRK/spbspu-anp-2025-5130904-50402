@@ -41,6 +41,18 @@ namespace sogdanov
     double d_;
     point_t pos_;
   };
+  struct Diamond: Shape {
+    Diamond(double dx, double dy, point_t p);
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
+    void move(double dx, double dy) override;
+    void move(point_t p) override;
+    void scale(double k) override;
+  private:
+    double dx_;
+    double dy_;
+    point_t pos_;
+  };
 }
 int main()
 {}
