@@ -6,7 +6,7 @@ namespace sogdanov
     double y;
   };
   struct rectangle_t {
-    double widht;
+    double width;
     double height;
     point_t pos;
   };
@@ -19,7 +19,7 @@ namespace sogdanov
     virtual void scale(double k) = 0;
   };
   struct Rectangle: Shape {
-    Rectangle(double widht, double height, point_t p);
+    Rectangle(double width, double height, point_t p);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(const point_t p) override;
@@ -27,8 +27,8 @@ namespace sogdanov
     void scale(double k) override;
   private:
     double width_;
-    double height;
-    poin_t pos_;
+    double height_;
+    point_t pos_;
   };
   struct Xquare: Shape {
     Xquare(double d, point_t p);
@@ -62,7 +62,22 @@ namespace sogdanov
   void output(Shape * shps[], size_t size);
 }
 int main()
-{}
+{
+  sogdanov::Rectangle rect(2.0, 8.0, {-3.0, 4.0});
+  sogdanov::Xquare xq(5.0, {1.0, 3.0});
+  sogdanov::Diamond dm(4.0, 8.0, {-2.0, 2.0});
+  const size_t N = 3;
+  sogdanov::Shape * shps[N] = {&rect, &xq, &dm};
+  sogdanov::output(shps, N);
+  sogdanov::point_t pt{};
+  double k = 0.0;
+  if (!(std::cin >> pt.x >> pt.y >> k)) {
+    std::cerr << "bad arg\n";
+    return 1;
+  }
+  sogdanov::scaleFromPoint(shps, k, N, pt);
+  sogdanov::output(shps, N);
+}
 sogdanov::Rectangle::Rectangle(double width, double height, point_t p):
   sogdanov::Shape(), width(width_), height(height_), p(pos_)
 {}
